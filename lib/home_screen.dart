@@ -62,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
 
               ),
-              controller: loginController.nameController,
+              controller: loginController.nameController.value,
             ),
             SizedBox(height: 10,),
             TextField(
@@ -71,9 +71,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 border: OutlineInputBorder(
                     borderRadius:BorderRadius.circular(12)
                 ),
-
               ),
-              controller: loginController.passwordController,
+              controller: loginController.passwordController.value,
             ),
             SizedBox(height: 20,),
             OutlinedButton(onPressed: (){
