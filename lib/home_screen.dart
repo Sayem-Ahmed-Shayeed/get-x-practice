@@ -13,9 +13,10 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  CounterController counterController=Get.put(CounterController());
-  OpacityController opacityController =Get.put(OpacityController());
-  LoginController loginController=Get.put(LoginController());
+  CounterController counterController = Get.put(CounterController());
+  OpacityController opacityController = Get.put(OpacityController());
+  LoginController loginController = Get.put(LoginController());
+
   @override
   Widget build(BuildContext context) {
     print("obx");
@@ -26,21 +27,23 @@ class _HomeScreenState extends State<HomeScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Obx(() {
-
               return Text(counterController.counter.value.toString());
             }),
-            SizedBox(height: 20,),
-            OutlinedButton(onPressed: (){
-              counterController.increment();
-            }, child: Text("Incre")),
+            SizedBox(height: 20),
+            OutlinedButton(
+              onPressed: () {
+                counterController.increment();
+              },
+              child: Text("Incre"),
+            ),
             Divider(),
-            SizedBox(height: 20,),
-            Obx((){
+            SizedBox(height: 20),
+            Obx(() {
               return Opacity(
                 opacity: opacityController.opacity.value,
                 child: Container(
                   margin: EdgeInsets.all(20),
-                  height: Get.height*0.2,
+                  height: Get.height * 0.2,
                   width: Get.width,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
@@ -50,38 +53,75 @@ class _HomeScreenState extends State<HomeScreen> {
               );
             }),
             Obx(() {
-              return Slider(value: opacityController.opacity.value, onChanged: (value) => opacityController.changeOpacity(value),);
-            },),
+              return Slider(
+                value: opacityController.opacity.value,
+                onChanged: (value) => opacityController.changeOpacity(value),
+              );
+            }),
             Divider(),
-            SizedBox(height: 20,),
+            SizedBox(height: 20),
             TextField(
               decoration: InputDecoration(
-                hintText:"Name",
+                hintText: "Name",
                 border: OutlineInputBorder(
-                  borderRadius:BorderRadius.circular(12)
+                  borderRadius: BorderRadius.circular(12),
                 ),
-
               ),
               controller: loginController.nameController.value,
             ),
-            SizedBox(height: 10,),
+            SizedBox(height: 10),
             TextField(
               decoration: InputDecoration(
-                hintText:"Name",
+                hintText: "Name",
                 border: OutlineInputBorder(
-                    borderRadius:BorderRadius.circular(12)
+                  borderRadius: BorderRadius.circular(12),
                 ),
               ),
               controller: loginController.passwordController.value,
             ),
-            SizedBox(height: 20,),
-            OutlinedButton(onPressed: (){
-              loginController.login();
-            }, child: Text("Login")),
+            SizedBox(height: 20),
+            OutlinedButton(
+              onPressed: () {
+                loginController.login();
+              },
+              child: Text("Login"),
+            ),
             Divider(),
-            OutlinedButton(onPressed: (){
-              Get.to(()=>SecondPage());
-            }, child: Text("Go to second page"))
+            OutlinedButton(
+              onPressed: () {
+                Get.to(() => SecondPage());
+              },
+              child: Text("Go to second page"),
+            ),
+            OutlinedButton(
+              onPressed: () {
+                Get.bottomSheet(
+                  Container(
+                    height: 200,
+                    color: Colors.white,
+                    child: Column(
+                      children: [
+                        ListTile(
+                          leading: Icon(Icons.dark_mode),
+                          title: Text("Dark Mode"),
+                          onTap: () {
+                            Get.changeTheme(ThemeData.dark());
+                          },
+                        ),
+                        ListTile(
+                          leading: Icon(Icons.light),
+                          title: Text("light Mode"),
+                          onTap: () {
+                            Get.changeTheme(ThemeData.light());
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+              child: Text("Open a bottom Modal sheet"),
+            ),
           ],
         ),
       ),
